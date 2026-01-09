@@ -1,0 +1,54 @@
+{% extends 'gacha/base.html' %}
+{% block title %}ホーム えらいねガチャ{% endblock %}
+
+{% block content %}
+<div class="grid">
+  <section class="card">
+    <h1 class="h1">今日のえらいこと</h1>
+    <p class="p">小さくてもいい 登録できた時点でえらい</p>
+
+    <form method="post" class="stack">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div>
+        {{ form.content.errors }}
+        {{ form.content }}
+      </div>
+      <button class="btn btn-primary" type="submit">登録する</button>
+    </form>
+
+    <hr class="hr">
+
+    <h2 class="h2">今日の記録</h2>
+    <ul class="list">
+      {% for a in today_actions %}
+      <li>{{ a.content }}</li>
+      {% empty %}
+      <li class="muted">まだありません</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <aside class="card">
+    <h2 class="h2">ガチャ</h2>
+
+    {% if today_result %}
+    <span class="badge">今日のガチャ済み</span>
+    <div class="stack" style="margin-top:12px;">
+      <div class="card" style="box-shadow:none;">
+        {{ today_result.result_text }}
+      </div>
+      <a class="btn btn-ghost" href="{% url 'gacha:history' %}">履歴を見る</a>
+    </div>
+    {% elif today_actions %}
+    <div class="stack">
+      <p class="p">準備できた 今日の分を引こう</p>
+      <a class="btn btn-primary" href="{% url 'gacha:gacha' %}">今日のガチャを引く</a>
+      <a class="btn btn-ghost" href="{% url 'gacha:history' %}">履歴を見る</a>
+    </div>
+    {% else %}
+    <p class="p">まずは今日のひとことを1つ登録してね</p>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

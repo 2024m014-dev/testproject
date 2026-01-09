@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ユーザー登録</title>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+
+<body>
+    <main class="wrap main">
+        <section class="card" style="max-width:520px; margin:0 auto;">
+            <h1>ユーザー登録</h1>
+
+            <form method="post" class="stack">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary" type="submit">登録</button>
+            </form>
+
+            <a class="btn btn-ghost" href="/login/">ログインへ</a>
+        </section>
+    </main>
+</body>
+
+</html>

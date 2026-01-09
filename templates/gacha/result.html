@@ -1,0 +1,18 @@
+{% extends 'gacha/base.html' %}
+{% block title %}結果 えらいねガチャ{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1 class="h1">今日の結果</h1>
+    <p class="p">1日1回のごほうび</p>
+
+    <div class="card" style="box-shadow:none;">
+        {{ result.result_text }}
+    </div>
+
+    <div class="stack" style="margin-top:14px;">
+        <a class="btn btn-primary" href="{% url 'gacha:home' %}">ホームへ戻る</a>
+        <a class="btn btn-ghost" href="{% url 'gacha:history' %}">履歴を見る</a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'gacha/base.html' %}
+{% block title %}履歴 えらいねガチャ{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1 class="h1">履歴</h1>
+    <p class="p">積み上げが見えると強い</p>
+
+    <h2 class="h2">えらいこと</h2>
+    <ul class="list">
+        {% for a in actions %}
+        <li>{{ a.created_at }} {{ a.content }}</li>
+        {% empty %}
+        <li class="muted">まだありません</li>
+        {% endfor %}
+    </ul>
+
+    <hr class="hr">
+
+    <h2 class="h2">ガチャ結果</h2>
+    <ul class="list">
+        {% for r in results %}
+        <li>{{ r.created_at }} {{ r.result_text }}</li>
+        {% empty %}
+        <li class="muted">まだありません</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

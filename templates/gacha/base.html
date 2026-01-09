@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}えらいねガチャ{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header__inner">
+            <a class="brand" href="{% url 'gacha:home' %}">えらいねガチャ</a>
+
+            <nav class="nav">
+                <a class="nav__link" href="{% url 'gacha:home' %}">ホーム</a>
+                <a class="nav__link" href="{% url 'gacha:history' %}">履歴</a>
+                <a class="nav__link" href="/logout/">ログアウト</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% if messages %}
+        <div class="stack">
+            {% for message in messages %}
+            <div class="toast">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <small>えらいねガチャ</small>
+        </div>
+    </footer>
+</body>
+
+</html>
