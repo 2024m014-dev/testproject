@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.http import HttpResponse
 
 import random
 
@@ -22,6 +23,7 @@ PRAISE_LIST = [
 @login_required
 def home(request):
     today = date.today()
+    return HttpResponse("ok")
 
     today_actions = Action.objects.filter(created_at=today)
     today_result = GachaResult.objects.filter(created_at=today).first()
