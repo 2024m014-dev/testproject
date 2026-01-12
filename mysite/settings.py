@@ -127,6 +127,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = [https://testproject-8vwl.onrender.com,"localhost", "127.0.0.1"]
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.fallback.FallbackStorage"
