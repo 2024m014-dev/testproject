@@ -10,6 +10,12 @@
         {{ result.result_text }}
     </div>
 
+    {% if result.image_url %}
+    <div style="margin-top:12px;">
+        <img src="{{ result.image_url }}" alt="dog" style="max-width:320px; border-radius:12px;">
+    </div>
+    {% endif %}
+
     <div class="stack" style="margin-top:14px;">
         <a class="btn btn-primary" href="{% url 'gacha:home' %}">ホームへ戻る</a>
         <a class="btn btn-ghost" href="{% url 'gacha:history' %}">履歴を見る</a>

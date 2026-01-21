@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+import requests
 
 import random
 
@@ -62,8 +63,13 @@ def gacha(request):
 
     result = GachaResult.objects.filter(user=request.user, created_at=today).first()
     if result is None:
+        dog_img = fetch_dog_image_url()
+        print("DOG IMG:", dog_img)
+
         result = GachaResult.objects.create(
-            user=request.user, result_text=random.choice(PRAISE_LIST)
+            user=request.user,
+            result_text=random.choice(PRAISE_LIST),
+            image_url=dog_img,
         )
 
     return render(request, "gacha/result.html", {"result": result})
@@ -93,3 +99,11 @@ def signup(request):
         form = UserCreationForm()
 
     return render(request, "registration/signup.html", {"form": form})
+
+
+def fetch_dog_image_url():
+    r = requests.get("https://dog.ceo/api/breeds/image/random", timeout=3)
+    r.raise_for_status()
+    data = r.json()
+    url = data["message"]
+    return url
