@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -28,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-temp-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "True") == "True"
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 
 # Application definition
@@ -77,10 +78,10 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+    )
 }
 
 
@@ -130,3 +131,5 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 ALLOWED_HOSTS = ["testproject-8vwl.onrender.com", "localhost", "127.0.0.1"]
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.fallback.FallbackStorage"
+
+CSRF_TRUSTED_ORIGINS = ["https://testproject-8w1.onrender.com"]
