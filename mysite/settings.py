@@ -133,3 +133,17 @@ ALLOWED_HOSTS = ["testproject-8vwl.onrender.com", "localhost", "127.0.0.1"]
 MESSAGE_STORAGE = "django.contrib.messages.storage.fallback.FallbackStorage"
 
 CSRF_TRUSTED_ORIGINS = ["https://testproject-8w1.onrender.com"]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "root": {"handlers": ["console"], "level": "INFO"},
+    "loggers": {
+        "django.request": {
+            "handlers": ["console"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    },
+}
